@@ -12,7 +12,7 @@ const UrlShortener = () => {
       const res = await axios.post('http://localhost:5000/v1/shortern', {
         originalUrl,
       });
-      setShortUrl(res.data.shortUrl); 
+      setShortUrl(res.data.shortUrl);
     } catch (err) {
       console.error('Error:', err);
     }
@@ -37,9 +37,14 @@ const UrlShortener = () => {
       {shortUrl && (
         <div className="short-url-box">
           Shortened Link:{' '}
-          <a href={shortUrl} target="_blank" rel="noopener noreferrer">
-            {shortUrl}
+          <a
+            href={`http://localhost:5000/${shortUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {`https://fi.by/${shortUrl}`}
           </a>
+
         </div>
       )}
     </div>

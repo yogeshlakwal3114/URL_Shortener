@@ -12,7 +12,7 @@ const generateShortUrl = async (req, res) => {
         // Check if URL already exists in DB
         let existingUrl = await Url.findOne({ originalUrl });
         if (existingUrl) {
-            return res.status(200).json({ shortUrl: process.env.DOMAIN_NAME + existingUrl.shortUrl });
+            return res.status(200).json({ shortUrl: existingUrl.shortUrl });
         }
 
         const companyName = process.env.DOMAIN_NAME
@@ -28,7 +28,7 @@ const generateShortUrl = async (req, res) => {
         const newUrl = new Url({ originalUrl, shortUrl });
         await newUrl.save();
 
-        res.status(201).json({ shortUrl: process.env.DOMAIN_NAME + shortUrl });
+        res.status(201).json({ shortUrl: shortUrl });
     } catch (err) {
         console.error("Error generating short URL:", err);
         res.status(500).json({ error: "Server error" });
